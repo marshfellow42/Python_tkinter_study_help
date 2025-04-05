@@ -58,7 +58,7 @@ def choose_subject():
     update_revert_button()
 
     # Exibir nova janela com a matéria escolhida
-    show_subject_window(chosen_subject)
+    show_subject_window(chosen_subject, selected_file)
 
 def revert_subject():
     """Reverte o primeiro item da lista 'materia_escolhida' para 'materia_nao_escolhida'."""
@@ -88,14 +88,17 @@ def revert_subject():
     # Atualizar visibilidade do botão de reversão
     update_revert_button()
 
-def show_subject_window(subject):
+def show_subject_window(subject, materia):
     """Exibe uma nova janela com a matéria escolhida."""
     new_window = tk.Toplevel(root)
-    new_window.title("Matéria do Dia")
-    new_window.geometry("300x150")
+    new_window.title(f"Matéria do Dia - {materia}")
 
     label = tk.Label(new_window, text=subject, font=("Arial", 18, "bold"))
-    label.pack(expand=True)
+    label.pack(expand=True, padx=20, pady=20)
+
+    # Ajustar tamanho da janela com base no tamanho do texto
+    text_width = max(len(subject) * 14, 300)  # Aumentado para 14 px por caractere
+    new_window.geometry(f"{text_width}x150")
 
 # Criando a interface gráfica
 root = tk.Tk()
